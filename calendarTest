@@ -1,0 +1,28 @@
+import java.time.*;
+
+public class calendarTest {
+    public static void main(String[] args){
+        LocalDate date = LocalDate.now();
+        int month = date.getMonthValue();
+        int today = date.getDayOfMonth();
+
+        date = date.minusDays(today - 1);//输入月初
+        DayOfWeek weekday = date.getDayOfWeek();
+        int value = weekday.getValue();//周一-周日 == 1-7
+
+        System.out.println("Mon Tue Wed Thu Fri Sat Sun");
+        for (int i = 1;i < value;i++)//给月初当周之前的日子填上空格
+            System.out.print("    ");
+        while (date.getMonthValue() == month){//获取月份，从当月的第一天开始循环
+            System.out.printf("%3d",date.getDayOfMonth());
+            if (date.getDayOfMonth() == today)//如果循环的日期为今天
+                System.out.print("*");
+            else
+                System.out.print(" ");
+            date = date.plusDays(1);//日期+1
+            if (date.getDayOfWeek().getValue() == 1) System.out.println();//如果是周日则换行
+        }
+        if (date.getDayOfWeek().getValue() != 1) System.out.println();//如果已经是月末，换行
+
+    }
+}
