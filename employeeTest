@@ -1,0 +1,52 @@
+import java.time.LocalDate;
+
+public class employeeTest {
+    public static void main(String args[]){
+        //给员工数组添加三个雇员信息
+        Employee[] staff = new Employee[3];
+
+        staff[0] = new Employee("Vic",7500,1993,12,15);
+        staff[1] = new Employee("Nacy",6000,1996,6,6);
+        staff[2] = new Employee("Chust",6000,1997,8,21);
+
+        //提高所有雇员5%的工资
+        for (Employee e : staff)
+            e.raiseSalary(5);
+
+        //for each遍历数组输出雇员信息
+        for (Employee e : staff){
+            System.out.println("name = " + e.getName() + ",salary = " + e.getSalary() + ",hireDay = " + e.getHireDay());
+            System.out.println();
+        }
+    }
+
+    static class Employee{
+        private String name;
+        private double salary;
+        private LocalDate hireDay;
+
+        public Employee(String n, double s, int year, int month, int day){
+            name = n;
+            salary = s;
+            hireDay = LocalDate.of(year,month,day);
+        }
+
+        public String getName(){
+            return  name;
+        }
+
+        public double getSalary() {
+            return salary;
+        }
+
+        public LocalDate getHireDay() {
+            return hireDay;
+        }
+
+        public void raiseSalary(double byPercent){
+            //提高工资的算法
+            double raise = salary * byPercent/100;
+            salary += raise;
+        }
+    }
+}
